@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --velaro-black: #080808;
+    --velaro-charcoal: #111111;
+    --velaro-surface: #161616;
+    --velaro-gold: #C6A15B;
+    --velaro-white: #F5F5F5;
+    --velaro-muted: #A5A5A5;
+  }
+
+  body {
+    background-color: var(--velaro-black);
+    color: var(--velaro-white);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+}
+
+@layer components {
+  .page-shell { @apply pt-40 lg:pt-48; }
+  .eyebrow { @apply text-[10px] uppercase tracking-[0.25em] text-velaro-gold font-semibold; }
+  .field { @apply w-full bg-velaro-black border border-velaro-border px-4 py-3 text-sm text-velaro-white rounded-sm; }
+  .gold-button { @apply bg-velaro-gold text-velaro-black px-6 py-3 text-xs font-semibold uppercase tracking-widest hover:bg-velaro-white transition-colors; }
+}
+
+:focus-visible { outline: 2px solid #C6A15B !important; outline-offset: 4px; }
+.skip-link { position: fixed; top: -100px; left: 16px; z-index: 100; padding: 12px 20px; background: #C6A15B; color: #080808; }
+.skip-link:focus { top: 16px; }
+html { scroll-padding-top: 170px; }
+main > .pt-24, main > .pt-28 { padding-top: 150px; }
+.dialog-overlay { overscroll-behavior: contain; }
+.dialog-overlay > .my-8 { max-height: calc(100dvh - 3rem); overflow-y: auto; margin-block: auto; }
+.bg-radial-vignette { background: radial-gradient(ellipse at center, transparent 15%, #080808 100%); }
+.animate-fadeIn { animation: slideUpFade .3s ease-out both; }
+@media (min-width: 1024px) { main > .pt-24, main > .pt-28 { padding-top: 175px; } }
+@media (max-width: 639px) {
+  .dialog-overlay > .my-8 { padding: 24px 16px; }
+  .dialog-overlay .pl-10 { padding-left: 0; }
+  .dialog-overlay .max-w-md { max-width: 100vw; }
+  .dialog-overlay .p-6 { padding: 16px; }
+  .dialog-overlay .flex-1 { min-width: 0; }
+  .compare-bar { padding: 12px; }
+  .product-card-meta { flex-direction: column; align-items: flex-start; gap: 4px; }
+}
+@media (hover: none) { .group .translate-y-full { transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+/* Custom Luxury Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #080808;
+}
+::-webkit-scrollbar-thumb {
+  background: #222222;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C6A15B;
+}
+
+/* Toast Keyframe Animations */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-toast {
+  animation: slideUpFade 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Subtle image scale transition */
+.img-zoom-subtle {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.img-zoom-subtle:hover {
+  transform: scale(1.03);
+}
+
+/* Clean hide scrollbar rule */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
